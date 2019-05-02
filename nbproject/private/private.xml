@@ -5,25 +5,30 @@
         <group>
             <file>file:/D:/Program%20Files/XAMPP/htdocs/mywebsite.com/app/view/loading.phtml</file>
             <file>file:/D:/Program%20Files/XAMPP/htdocs/mywebsite.com/public/index.php</file>
-            <file>file:/D:/Program%20Files/XAMPP/htdocs/mywebsite.com/core/Router.php</file>
+            <file>file:/D:/Program%20Files/XAMPP/htdocs/mywebsite.com/app/view/contact/contact.phtml</file>
             <file>file:/D:/Program%20Files/XAMPP/htdocs/mywebsite.com/app/controller/homeController.php</file>
-            <file>file:/D:/Program%20Files/XAMPP/htdocs/mywebsite.com/app/controller/restaurantsController.php</file>
-            <file>file:/D:/Program%20Files/XAMPP/htdocs/mywebsite.com/core/Model.php</file>
-            <file>file:/D:/Program%20Files/XAMPP/htdocs/mywebsite.com/config/config.php</file>
-            <file>file:/D:/Program%20Files/XAMPP/htdocs/mywebsite.com/core/View.php</file>
-            <file>file:/D:/Program%20Files/XAMPP/htdocs/mywebsite.com/app/model/Restaurants.php</file>
+            <file>file:/D:/Program%20Files/XAMPP/htdocs/mywebsite.com/app/view/amusement/amusement.phtml</file>
+            <file>file:/D:/Program%20Files/XAMPP/htdocs/mywebsite.com/public/css/main.css</file>
+            <file>file:/D:/Program%20Files/XAMPP/htdocs/mywebsite.com/public/js/carousel.js</file>
             <file>file:/D:/Program%20Files/XAMPP/htdocs/mywebsite.com/app/view/restaurants/detail.phtml</file>
             <file>file:/D:/Program%20Files/XAMPP/htdocs/mywebsite.com/app/view/footer.phtml</file>
+            <file>file:/D:/Program%20Files/XAMPP/htdocs/mywebsite.com/public/js/script.js</file>
+            <file>file:/D:/Program%20Files/XAMPP/htdocs/mywebsite.com/app/controller/ajaxController.php</file>
+            <file>file:/D:/Program%20Files/XAMPP/htdocs/mywebsite.com/core/Router.php</file>
+            <file>file:/D:/Program%20Files/XAMPP/htdocs/mywebsite.com/app/controller/restaurantsController.php</file>
+            <file>file:/D:/Program%20Files/XAMPP/htdocs/mywebsite.com/core/Model.php</file>
+            <file>file:/D:/Program%20Files/XAMPP/htdocs/mywebsite.com/core/View.php</file>
+            <file>file:/D:/Program%20Files/XAMPP/htdocs/mywebsite.com/public/css/ticket.css</file>
+            <file>file:/D:/Program%20Files/XAMPP/htdocs/mywebsite.com/app/controller/amusementController.php</file>
+            <file>file:/D:/Program%20Files/XAMPP/htdocs/mywebsite.com/app/model/Restaurants.php</file>
             <file>file:/D:/Program%20Files/XAMPP/htdocs/mywebsite.com/core/Controller.php</file>
             <file>file:/D:/Program%20Files/XAMPP/htdocs/mywebsite.com/app/controller/aboutController.php</file>
-            <file>file:/D:/Program%20Files/XAMPP/htdocs/mywebsite.com/app/view/pagination.phtml</file>
             <file>file:/D:/Program%20Files/XAMPP/htdocs/mywebsite.com/app/view/home/index.phtml</file>
-            <file>file:/D:/Program%20Files/XAMPP/htdocs/mywebsite.com/public/css/style.css</file>
+            <file>file:/D:/Program%20Files/XAMPP/htdocs/mywebsite.com/app/view/about/about.phtml</file>
+            <file>file:/D:/Program%20Files/XAMPP/htdocs/mywebsite.com/app/controller/contactController.php</file>
             <file>file:/D:/Program%20Files/XAMPP/htdocs/mywebsite.com/app/view/restaurants/index.phtml</file>
-            <file>file:/D:/Program%20Files/XAMPP/htdocs/mywebsite.com/public/js/script.js</file>
             <file>file:/D:/Program%20Files/XAMPP/htdocs/mywebsite.com/app/library/helpers/helper.php</file>
             <file>file:/D:/Program%20Files/XAMPP/htdocs/mywebsite.com/app/view/header.phtml</file>
-            <file>file:/D:/Program%20Files/XAMPP/htdocs/mywebsite.com/app/controller/ajaxController.php</file>
         </group>
     </open-files>
 </project-private>

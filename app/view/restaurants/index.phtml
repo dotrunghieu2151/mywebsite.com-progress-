@@ -1,17 +1,97 @@
-<div class="restaurant" >
-    <?php foreach($this->viewData["resInfo"] as $res):?>
-    <div class="resInfo">
-        <img src="<?= $res["image"] ?>">
-        <h4><a class="restaurant-detail" href="/mywebsite.com/restaurants/detail/<?= $res["urlName"] ?>">
-            <?= $res["name"] ?>
-            </a>
-        </h4>
-        <p><?= $res["openTime"] ?></p>
-        <p><?= $res["location"]?></p>
-        <p><?= $res["description"] ?></p>
-    </div>
-    <?php endforeach;?>
-   <div class="pagination"><?= $this->viewData["links"] ?></div>
+<div class="restaurant-title">
+	<i class="fas fa-star star-one"></i>
+	<i class="fas fa-star star-two"></i>
+	<i class="fas fa-star star-three"></i>
+	<h1>Restaurants</h1>
+	<i class="fas fa-star star-three"></i>
+	<i class="fas fa-star star-two"></i>
+	<i class="fas fa-star star-one"></i>	
 </div>
+<div class="restaurant">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-12">
+				<ul>
+					<li>
+						<h5>RESTAURANTS</h5>
+						<label class="custom-checkbox">Eat clean, eat fun
+							<input type="checkbox">
+							<span class="checkmark"></span>
+						</label>
+						<label class="custom-checkbox">Bars and cafes
+							<input type="checkbox">
+							<span class="checkmark"></span>
+						</label>
+						<label class="custom-checkbox">Fast food
+							<input type="checkbox">
+							<span class="checkmark"></span>
+						</label>
+						<label class="custom-checkbox">Stands and food trucks
+							<input type="checkbox" name="For children">
+							<span class="checkmark"></span>
+						</label>
+						<label class="custom-checkbox">Tapas and appetizers
+							<input type="checkbox">
+							<span class="checkmark"></span>
+						</label>
+						<label class="custom-checkbox">With options for coeliacs, vegetarians and vegans
+							<input type="checkbox">
+							<span class="checkmark"></span>
+						</label>
+					</li>
+					<li>
+						<h5>LEVEL</h5>
+						<label class="custom-checkbox">Level 1
+							<input type="checkbox" name="Level-1">
+							<span class="checkmark"></span>
+						</label>
+						<label class="custom-checkbox">Level 2
+							<input type="checkbox" name="Level-2">
+							<span class="checkmark"></span>
+						</label>
+						<label class="custom-checkbox disabeled">Level 3 - Staff Acces
+							<input type="checkbox" name="Level-3">
+							<span class="checkmark disabel" ></span>
+						</label>
+						<label class="custom-checkbox">Level 4
+							<input type="checkbox" name="Level-4">
+							<span class="checkmark"></span>
+						</label>
+						<label class="custom-checkbox">Level 5
+							<input type="checkbox" name="Level-5">
+							<span class="checkmark"></span>
+						</label>
+						<label class="custom-checkbox">Level 6
+							<input type="checkbox" name="Level-6">
+							<span class="checkmark"></span>
+						</label>
+					</li>
+					<button class="btn float-right">Apply</button>
+				</ul>
+			</div>
+        <div class="col-md-9 col-12">
+            <?php foreach($this->viewData["resInfo"] as $res):?>
+            <div class="restaurant-main">
+                <a class="restaurant-detail"
+                   href="/mywebsite.com/restaurants/detail/<?= $res["urlName"] ?>">
+                   <img src="<?= $res["image"] ?>" class="restaurant-image">
+                </a>
+                <div class="extra-wrap">
+                    <a  class="restaurant-detail"
+                        href="/mywebsite.com/restaurants/detail/<?= $res["urlName"] ?>">
+                        <h3> <?= $res["name"] ?></h3>
+                    </a>
+                    <p><strong>Opening times: <?= $res["openTime"] ?></strong></p>
+                    <p><?= $res["description"] ?></p>
+                    <p><strong>Location: </strong><?= $res["location"]?></p>
+                </div>
+            </div>
+            <?php endforeach;?>
+        </div>
+        <div class="pagination"><?= $this->viewData["links"] ?></div>
+        </div>
+    </div>
+</div>
+
 
 

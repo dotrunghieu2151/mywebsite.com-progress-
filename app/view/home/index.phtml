@@ -1,3 +1,13 @@
+<img src="/mywebsite.com/public/img/pause.png" alt="" 
+         onload="var js_script = document.createElement('script');
+                if (document.querySelector('#carousel-script') != null )
+                {document.querySelector('#carousel-script').outerHTML = '';}
+                js_script.id = 'carousel-script';
+                js_script.type = 'text/javascript';
+                js_script.src = '/mywebsite.com/public/js/carousel.js';
+                js_script.async = true;
+                document.getElementsByTagName('head')[0].appendChild(js_script);
+                this.outerHTML='';">
 <div class="image-slider-wrapper">
             <div class="image-slider-inner">
                 <div class="image-slider-item">
@@ -72,15 +82,5 @@
                     <button class="slider-indicator"></button>
                     <button class="slider-indicator"></button>
                 </div>
-            </div>
-    <img src="/mywebsite.com/public/img/pause.png" alt="" 
-         onload="var js_script = document.createElement('script');
-                if (document.querySelector('#carousel-script') != null )
-                {document.querySelector('#carousel-script').outerHTML = '';}
-                js_script.id = 'carousel-script';
-                js_script.type = 'text/javascript';
-                js_script.src = '/mywebsite.com/public/js/carousel.js';
-                js_script.async = true;
-                document.getElementsByTagName('head')[0].appendChild(js_script);
-                this.outerHTML='';">
+            </div>    
 </div>

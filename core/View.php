@@ -19,9 +19,9 @@ class View {
                 die();
             } else {
                 require_once VIEW . "header.phtml";
-                require_once VIEW . $this->viewName . ".phtml";
-                require_once VIEW . "loading.phtml";
+                require_once VIEW . $this->viewName . ".phtml";            
                 require_once VIEW . "footer.phtml";
+                require_once VIEW . "loading.phtml";
             }
         } 
         else {

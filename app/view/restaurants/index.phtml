@@ -77,10 +77,11 @@
                    <img src="<?= $res["image"] ?>" class="restaurant-image">
                 </a>
                 <div class="extra-wrap">
-                    <a  class="restaurant-detail"
+                    <h3><a  class="restaurant-detail"
                         href="/mywebsite.com/restaurants/detail/<?= $res["urlName"] ?>">
-                        <h3> <?= $res["name"] ?></h3>
-                    </a>
+                        <?= $res["name"] ?>
+                        </a>
+                    </h3>
                     <p><strong>Opening times: <?= $res["openTime"] ?></strong></p>
                     <p><?= $res["description"] ?></p>
                     <p><strong>Location: </strong><?= $res["location"]?></p>

@@ -1,28 +1,14 @@
 $(document).ready(function(){
-	// scroll
-        /*
-	$(window).scroll(function(){
-	if ($(window).scrollTop() >= 50){
-		$('#second-header').addClass("fixed-header")
-    	$('#first-header').addClass("visible-title");
-	}
-	else {
-		$('#second-header').removeClass("fixed-header");
-    	$('#first-header').removeClass("visible-title");
-	}
-    });
-	*/
-        // scroll ends
     const slides = $('.image-slider-item');
     let currentIndex = 0;
     const captionList = $('.caption');
     const indicatorList = $('.slider-indicator');
     const speed = 250;
-    const pauseButton = $('.pause-unpause-button img');
+    const loopDelay = 10000;
     let animationPlaying = false;
     let loop;
     function enableLoop(){
-      loop = setInterval(function(){moveSlide(currentIndex+1,'100%','-100%');},4000);
+      loop = setInterval(function(){moveSlide(currentIndex+1,'100%','-100%');},loopDelay);
     }
     enableLoop();
     function moveSlide(n, nextMove, prevMove) {
@@ -37,7 +23,6 @@ $(document).ready(function(){
             /* for indicator button */
             $(indicatorList[currentIndex]).css('opacity','0.5');
             $(indicatorList[n]).css('opacity','1');
-            /* for image indicator */
             animationPlaying = true;
             $(slides[n]).animate({left:'0'},speed,function(){
                 $(captionList[n]).css('display','block');
@@ -56,7 +41,6 @@ $(document).ready(function(){
             /* for indicator button */
             $(indicatorList[currentIndex]).css('opacity','0.5');
             $(indicatorList[n]).css('opacity','1');
-            /* for image indicator */            
             animationPlaying = true;
             $(slides[n]).animate({left:'0'},speed,function(){
                  $(captionList[n]).css('display','block');
@@ -78,8 +62,7 @@ $(document).ready(function(){
    let startingPoint, next, prev;
    $(slides).on({
        touchstart: function(e){
-           clearInterval(loop);
-           $(pauseButton).attr('src','img/unpause.png');
+          clearInterval(loop);       
           startingPoint = e.touches[0].clientX;
        },
        touchmove: function(e) {

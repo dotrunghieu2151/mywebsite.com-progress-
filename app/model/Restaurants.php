@@ -6,7 +6,7 @@ class Restaurants extends Model {
         $this->fields = ["name","location","openTime","description"];
     }
     public function getRestaurantName($query){
-        $this->sql = "SELECT name FROM $this->table WHERE name REGEXP :query";
+        $this->sql = "SELECT name FROM $this->table WHERE name REGEXP :query LIMIT 10";  
         $this->query($this->sql,[":query"=>$query]);
     }
     public function getRestaurant($currPage,$where = "",$whereParam = []){

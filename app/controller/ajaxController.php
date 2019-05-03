@@ -9,12 +9,18 @@ class ajaxController extends Controller {
             $input = json_decode($_POST["getData"]);
             $this->model("Restaurants");
             $this->model->getRestaurantName($input);
-            $output = "<ul>";
+            if ($this->model->getResult() == 0) {
+                echo json_encode(["output"=>false]);
+                exit();
+            }
+            $output = "<ul class='autocomplete' >";
             foreach ($this->model->getResult() as $v) {
-                $output .= "<li>{$v["name"]}</li>";
+                $output .= "<li class='autocomplete-li'>{$v["name"]}</li>";
             }
             $output .= "</ul>";
-            echo $output;
+            echo json_encode([
+                "output" => $output
+                    ]);
         }
         else {
             header("Location: /mywebsite.com/home");

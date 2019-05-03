@@ -1,2 +1,86 @@
-<h1>THIS IS HOME PAGE</h1>
-
+<div class="image-slider-wrapper">
+            <div class="image-slider-inner">
+                <div class="image-slider-item">
+                    <picture>
+                        <source media="(max-width:601px)" srcset="http://unsplash.it/800/600/?img=1000">
+                        <source media="(max-width:1025px)" srcset="http://unsplash.it/1024/768/?img=1000">
+                        <img src="http://unsplash.it/3440/1440/?img=1000">
+                    </picture>
+                    <div class="slider-caption">
+                        <p class="caption animated rotateIn ">Created by Do Trung Hieu</p>
+                    </div>
+                </div>
+                <div class="image-slider-item">
+                    <picture>
+                        <source media="(max-width:601px)" srcset="http://unsplash.it/800/600/?img=1001">
+                        <source media="(max-width:1025px)" srcset="http://unsplash.it/1024/768/?img=1001">
+                        <img src="http://unsplash.it/3440/1440/?img=1001">
+                    </picture>
+                    <div class="slider-caption">
+                        <p class="caption animated lightSpeedIn ">Caption 2</p>
+                    </div>
+                </div>
+                <div class="image-slider-item">
+                    <picture>
+                        <source media="(max-width:601px)" srcset="http://unsplash.it/800/600/?img=1002">
+                        <source media="(max-width:1025px)" srcset="http://unsplash.it/1024/768/?img=1002">
+                        <img src="http://unsplash.it/3440/1440/?img=1002">
+                    </picture>
+                    <div class="slider-caption">
+                        <p class="caption animated fadeInUp">Caption 3</p>
+                    </div>
+                </div>
+                <div class="image-slider-item">
+                    <picture>
+                        <source media="(max-width:601px)" srcset="http://unsplash.it/800/600/?img=1003">
+                        <source media="(max-width:1025px)" srcset="http://unsplash.it/1024/768/?img=1003">
+                        <img src="http://unsplash.it/3440/1440/?img=1003">
+                    </picture>
+                    <div class="slider-caption">
+                        <p class="caption animated zoomIn  ">Caption 4</p>
+                    </div>
+                </div>
+                <div class="image-slider-item">
+                    <picture>
+                        <source media="(max-width:601px)" srcset="http://unsplash.it/800/600/?img=1004">
+                        <source media="(max-width:1025px)" srcset="http://unsplash.it/1024/768/?img=1004">
+                        <img src="http://unsplash.it/3440/1440/?img=1004">
+                    </picture>
+                    <div class="slider-caption">
+                        <p class="caption animated bounceInDown">Caption 5</p>
+                    </div>
+                </div>
+                <div class="image-slider-item">
+                    <picture>
+                        <source media="(max-width:601px)" srcset="http://unsplash.it/800/600/?img=1005">
+                        <source media="(max-width:1025px)" srcset="http://unsplash.it/1024/768/?img=1005">
+                        <img src="http://unsplash.it/3440/1440/?img=1005">
+                    </picture>
+                    <div class="slider-caption">
+                        <p class="caption animated flipInX ">Caption 6</p>
+                    </div>
+                </div>
+                <!-- controler -->
+                <button class="slider-control" id="prevButton">&lt;</button>
+                <button class="slider-control" id="nextButton">&GT;</button>
+                <!-- indicator -->
+                <div class="slider-indicators">
+                    <button class="slider-indicator"></button>
+                    <button class="slider-indicator"></button>
+                    <button class="slider-indicator"></button>
+                    <button class="slider-indicator"></button>
+                    <button class="slider-indicator"></button>
+                    <button class="slider-indicator"></button>
+                </div>
+            </div>
+    <img src="/mywebsite.com/public/img/pause.png" alt="" 
+         onload="var js_script = document.createElement('script');
+                if (document.querySelector('#carousel-script') != null )
+                {document.querySelector('#carousel-script').outerHTML = '';}
+                js_script.id = 'carousel-script';
+                js_script.type = 'text/javascript';
+                js_script.src = '/mywebsite.com/public/js/carousel.js';
+                js_script.async = true;
+                document.getElementsByTagName('head')[0].appendChild(js_script);
+                this.outerHTML='';">
+</div>

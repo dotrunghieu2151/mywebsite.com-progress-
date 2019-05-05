@@ -22,8 +22,8 @@ class restaurantsController extends Controller {
         $link = "http://localhost:81/mywebsite.com/restaurants/show/page";
         $link = View::paginate($totalPages,$page,$link);
         $this->model->getRestaurant($page);
-        $assoParam = helper::createAssoParams(["pageTitle","resInfo","links"],
-                                              ["Mywebsite | Restaurants",$this->model->getResult(),$link]);
+        $assoParam = helper::createAssoParams(["pageTitle","resInfo","links","jsScript"],
+                                              ["Mywebsite | Restaurants",$this->model->getResult(),$link,"/mywebsite.com/public/js/autocomplete.js"]);
         $this->view("restaurants".DS."index",$assoParam);
     }
     public function search(){
@@ -35,7 +35,8 @@ class restaurantsController extends Controller {
             }
             // remember to filter out empty string if something goes wrong
             // for multiple search $filteredQuery = explode(" ",urldecode($q));
-            $filteredQuery = $_GET["q"];            
+            $_GET["q"] = trim($_GET["q"], " ");
+            $filteredQuery = $_GET["q"];           
             $this->model("Restaurants");
             $filteredQuery = $this->model->searchQuery($filteredQuery);
             $this->model->count($filteredQuery["whereQuery"],$filteredQuery["whereParam"]);
@@ -54,8 +55,8 @@ class restaurantsController extends Controller {
             $link = "http://localhost:81/mywebsite.com/restaurants/search/?q={$_GET["q"]}&p=";
             $link = View::paginate($totalPages, $page, $link);
             $this->model->getRestaurant($page,$filteredQuery["whereQuery"],$filteredQuery["whereParam"]);
-            $assoParam = helper::createAssoParams(["pageTitle","resInfo","links"],
-                    ["Mywebsite | Restaurants",$this->model->getResult(),$link]);
+            $assoParam = helper::createAssoParams(["pageTitle","resInfo","links","jsScript"],
+                    ["Mywebsite | Restaurants",$this->model->getResult(),$link,"/mywebsite.com/public/js/autocomplete.js"]);
             $this->view("restaurants".DS."index",$assoParam);
         } 
         else {
@@ -70,7 +71,8 @@ class restaurantsController extends Controller {
        }
        $this->model("Restaurants");
        $this->model->getDetail($name);
-       $assoParam = helper::createAssoParams(["pageTitle","detail"],["Mywebsite | Restaurants",$this->model->getResult()]);
+       $assoParam = helper::createAssoParams(["pageTitle","detail","jsScript"],
+                         ["Mywebsite | Restaurants",$this->model->getResult(),"/mywebsite.com/public/js/carousel-detail.js"]);
        $this->view("restaurants".DS."detail",$assoParam);
     }
 }

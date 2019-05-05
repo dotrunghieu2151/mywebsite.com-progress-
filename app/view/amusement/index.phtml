@@ -3,6 +3,13 @@
 		<div class="row">
 			<div class="col-md-3 col-12">
 				<ul>
+                                    <li class="search-bar">
+                                        <form autocomplete="off" id="search-form" action="http://localhost:81/mywebsite.com/restaurants" method="POST">
+                                            <input type="text" placeholder="Search..." name="search" id="search-input">
+                                            <button type="submit"><i class="fas fa-search"></i></button>    
+                                        </form>						
+				    </li>
+                                    <div class="autocomplete-container"></div>
 					<li class="by-type">
 						<h5>BY TYPE</h5>
 						<label class="custom-checkbox">Emblematic

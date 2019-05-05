@@ -78,20 +78,23 @@ class Model {
     public function searchQuery($query,$multiple = false){
         $where = "WHERE";
         $whereParam = [];
+        //$query = preg_quote($query);
+        // this is to escape ? * and # in REGEXP
+        // if you use LIKE then there is no need to escape
         if ($multiple) {
             $query = explode(" ",$query);
             foreach ($query as $q) {
                 foreach($this->fields as $field) {
-                    $where .= " $field REGEXP :$q OR";
+                    $where .= " $field LIKE :$q OR";
                 }         
-                $whereParam[":$q"] = $q;
+                $whereParam[":$q"] = "%$q%";
             }
         } 
         else {
            foreach ($this->fields as $field) {
-               $where .= " $field REGEXP :query OR";
+               $where .= " $field LIKE :query OR";
            }
-           $whereParam[":query"] = $query;
+           $whereParam[":query"] = "%$query%";
         }
         $where = rtrim($where, "OR");
         return ["whereQuery"=>$where,"whereParam"=>$whereParam];

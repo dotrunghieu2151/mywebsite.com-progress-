@@ -14,6 +14,7 @@ class View {
                 $response = ob_get_clean();
                 echo json_encode([
                    "pageTitle" => $this->viewData["pageTitle"],
+                    "scriptsrc" => $this->viewData["jsScript"] ?? null,
                     "html" => $response
                 ]);
                 die();

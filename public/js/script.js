@@ -6,11 +6,7 @@ window.onload = () => {
     const pages = document.querySelectorAll(".webpage");
     // ajax loading varibles
     const loadingAni = document.querySelector(".loading-wrapper");
-    const pageContent = document.querySelector(".page-content");
-    // search variables
-    const searchForm = document.querySelector("#search-form");
-    const searchInput = document.querySelector("#search-input");
-    const autocompleteContainer = document.querySelector(".autocomplete-container");
+    const pageContent = document.querySelector(".page-content");  
     function activeState(element){
         let activeEle = document.querySelector(".active");
         activeEle != null ? activeEle.classList.remove("active") : '';
@@ -35,6 +31,16 @@ window.onload = () => {
                 .catch(error => console.log(error) );
                 
     }
+    function loadScript(scriptsrc){
+        let js_script = document.createElement('script');
+        if (document.querySelector(`script[src="${scriptsrc}"]`) != null ){
+            document.querySelector(`script[src="${scriptsrc}"]`).outerHTML = '';
+        }
+        js_script.type = 'text/javascript';
+        js_script.src = scriptsrc;
+        js_script.async = true;
+        document.getElementsByTagName('head')[0].appendChild(js_script);
+    }
     async function loadPage(url,direction = "forward",data = "ajax",method="POST"){
        if(direction === "forward") {
            if(url != window.location.href) {                    
@@ -45,6 +51,7 @@ window.onload = () => {
                 loadingAni.style.display = "none";
                 document.title = response.pageTitle;
                 pageContent.innerHTML = response.html;
+                if (response.scriptsrc !== null) loadScript(response.scriptsrc);
                 window.history.pushState({path:url,activelink:document.querySelector(".active").id},null,url);
             }
         }
@@ -55,6 +62,7 @@ window.onload = () => {
             let response =  await get(url,data,method);
             document.title = response.pageTitle;
             pageContent.innerHTML = response.html;
+            if (response.scriptsrc !== null) loadScript(response.scriptsrc);
         }
     }
     window.addEventListener("popstate", function(e){
@@ -70,24 +78,7 @@ window.onload = () => {
             activeState(this);
             loadPage(this.href);          
         });
-    }
-    searchInput.addEventListener("input", async function(e){
-        if (this.value === "") {
-            autocompleteContainer.innerHTML = "";
-            return false;
-        }
-        let url = "http://localhost:81/mywebsite.com/ajax/autocomplete";
-        let response = await get(url,this.value,"POST");
-        autocompleteContainer.innerHTML  = response.output === false ? "" : response.output;
-    });
-    searchForm.addEventListener("submit",function(e){
-       e.preventDefault();
-       let input = searchInput.value;
-       let url = input === "" ?  
-       `http://localhost:81/mywebsite.com/restaurants` : `http://localhost:81/mywebsite.com/restaurants/search/?q=${input}`;
-       activeState(document.querySelector("#restaurant"));
-       loadPage(url);
-    });
+    };
     pageContent.addEventListener("click", function(e){
         // for restaurant detail a link
        if (e.target.classList.contains("restaurant-detail")){
@@ -108,11 +99,4 @@ window.onload = () => {
             loadPage(paginationURL);
         }    
     });
-    autocompleteContainer.addEventListener("click", function(e){
-         // for autocomplete;
-        if (e.target.classList.contains("autocomplete-li")) {
-            searchInput.value = e.target.innerHTML;
-            autocompleteContainer.innerHTML = "";
-        }
-    });   
 };

@@ -4,11 +4,11 @@ class ajaxController extends Controller {
         header("Location: /mywebsite.com/home");
         exit();
     }
-    public function autocomplete(){
+    public function autocomplete($name){
         if (filter_has_var(INPUT_POST, "getData")) {
             $input = json_decode($_POST["getData"]);
-            $this->model("Restaurants");
-            $this->model->getRestaurantName($input);
+            $this->model("$name");
+            $this->model->getName($input);
             if ($this->model->getResult() == 0) {
                 echo json_encode(["output"=>false]);
                 exit();

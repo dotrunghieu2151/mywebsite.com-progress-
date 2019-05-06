@@ -5,7 +5,7 @@ class Restaurants extends Model {
         $this->table = "restaurants";
         $this->fields = ["name","location","openTime","description"];
     }
-    public function getRestaurantName($query){
+    public function getName($query){
         $this->sql = "SELECT name FROM $this->table WHERE name LIKE :query LIMIT 10";  
         $this->query($this->sql,[":query"=>"%$query%"]);
     }

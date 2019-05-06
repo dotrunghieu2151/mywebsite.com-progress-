@@ -14,15 +14,15 @@ class View {
                 $response = ob_get_clean();
                 echo json_encode([
                    "pageTitle" => $this->viewData["pageTitle"],
-                    "scriptsrc" => $this->viewData["jsScript"] ?? null,
+                    "scriptsrc" => !empty($this->viewData["jsScript"]) ?
+                                   "/mywebsite.com/public/js/{$this->viewData["jsScript"]}" : null,
                     "html" => $response
                 ]);
                 die();
             } else {
                 require_once VIEW . "header.phtml";
                 require_once VIEW . $this->viewName . ".phtml";            
-                require_once VIEW . "footer.phtml";
-                require_once VIEW . "loading.phtml";
+                require_once VIEW . "footer.phtml"; 
             }
         } 
         else {

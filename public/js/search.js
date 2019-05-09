@@ -1,10 +1,11 @@
 $(document).ready(function(){
-    console.log("this is search.js");
    // search variable
-    let searchForm = document.querySelector(".search-form");
-    let searchInput = document.querySelector("#search-input");
-    let autocompleteContainer = document.querySelector(".autocomplete-container");
+    const searchForm = document.querySelector(".search-form");
+    const searchInput = document.querySelector("#search-input");
+    const autocompleteContainer = document.querySelector(".autocomplete-container");
+    const amusementItems = document.querySelector(".amusement-items");
     const loadingAni = document.querySelector(".loading-wrapper");
+    const amusementLoader = document.querySelector(".amusement-loader");
     const pageContent = document.querySelector(".page-content");
     if (searchForm !== null) {
     searchInput.addEventListener("input", async function(e){
@@ -24,7 +25,7 @@ $(document).ready(function(){
         let url = input === "" ?  
         searchForm.action : `${searchForm.action}/search/?q=${input}`;       
         let searchAjax = new LoadAjax(pageContent,loadingAni);
-        activeState(document.querySelector("#restaurant"));
+        activeState(document.querySelector(`#${this.id}`));
         searchAjax.setURL(url).loadPage();
      });
      autocompleteContainer.addEventListener("click", function(e){
@@ -35,4 +36,32 @@ $(document).ready(function(){
          }
      });
     }
+   if (amusementItems !== null) {
+       let offset = 0;
+       let endOfData = false;
+      $(window).scroll(async function(){
+         if($(window).scrollTop() >= $(document).height() - $(window).height()) {
+             if (endOfData) {
+                 return false;
+             }
+             else {
+                offset += 12;
+                const showmore = new LoadAjax(amusementItems,null, offset,"POST");
+                amusementLoader.style.display = "block";
+                const response = await showmore.setURL(window.location.href).get();
+                amusementLoader.style.display = "none";
+                if (response.html !== "no result found") {
+                     amusementItems.innerHTML += response.html;
+                } 
+                else if (response.html === "no result found") {
+                    endOfData = true;
+                }
+            }
+         } 
+      });
+      if (getCookie("scrollPosition")) {
+          $(window).scrollTop(getCookie("scrollPosition"));
+          eraseCookie("scrollPosition");
+       }
+   }
 });

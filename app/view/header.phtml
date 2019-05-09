@@ -15,6 +15,8 @@
         <link href="/mywebsite.com/public/css/ticket.css" rel="stylesheet" type="text/css"/>
         <script  src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 	<script  src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="/mywebsite.com/public/js/functions.js" type="text/javascript"></script>
         <script src="/mywebsite.com/public/js/main.js" type="text/javascript"></script>
         <script src="/mywebsite.com/public/js/carousel.js" type="text/javascript"></script>
         <script src="/mywebsite.com/public/js/carousel-detail.js" type="text/javascript"></script>
@@ -28,24 +30,96 @@
                  >Home</a></li>
           <li><a href="http://localhost:81/mywebsite.com/restaurants" 
                  class="webpage <?= preg_match("/restaurants/",$this->viewName) ? "active" : ''?>"
-                 id="restaurant">Restaurants</a></li>
+                 id="Restaurants">Restaurants</a></li>
           <li><a href="http://localhost:81/mywebsite.com/amusement" 
                  class="webpage <?= preg_match("/amusement/",$this->viewName) ? "active" : '' ?>"
-                 id="amusement">Amusement</a></li>
+                 id="Amusement">Amusement</a></li>
           <li><a href="http://localhost:81/mywebsite.com/about" 
                  class="webpage <?= preg_match("/about/",$this->viewName) ? "active" : '' ?>"
                  id="about">About</a></li>
            <li><a href="http://localhost:81/mywebsite.com/contact" 
                  class="webpage <?= preg_match("/contact/",$this->viewName) ? "active" : '' ?>"
                  id="contact">Contact</a></li>
-          <form action="" method="POST">
-              <input type="text" placeholder="username..." name="login-uName">
-              <input type="text" name="login-pass" placeholder="pass...">
-              <input type="submit" name="login-submit" value="login">
-              <button type="button"><a href="#">Sign up</a></button>
-              <button type="button"><a href="#">Forget pass ?</a></button>
-          </form>       
-        </ul>
+           <?php if(empty($_SESSION["user"])): ?>
+           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#sign-up">Sign Up</button>
+					<div class="modal fade" id="sign-up" tabindex="-1">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h4 class="modal-title">Sign Up</h4>
+							        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      									<span aria-hidden="true">&times;</span>
+    								</button>
+								</div>
+								<div class="modal-body">
+									<form action="/mywebsite.com/signup" method="POST">
+									  <div class="form-group">
+									    <label >Email address</label>
+									    <input type="email" class="form-control" id="sign-up-email" placeholder="Your email" name="email"
+                                                                                   value="<?= $_GET["e"] ?? ''?>">
+                                                                            <p class="errorMes"><?= $_SESSION['errorMes']['email'] ?? '' ?></p>
+                                                                          </div>
+									  <div class="form-group">
+									    <label >Username</label>
+									    <input type="text" class="form-control" id="sign-up-username" placeholder="Username" name="username"
+                                                                                   value="<?= $_GET["u"] ?? ''?>">
+                                                                            <p class="errorMes" ><?= $_SESSION['errorMes']['username'] ?? '' ?></p>
+                                                                          </div>
+									  <div class="form-group">
+									    <label>Password</label>
+									    <input type="password" class="form-control" id="sign-up-password" placeholder="Password" name="password">
+                                                                            <p class="errorMes" ><?= $_SESSION['errorMes']['password'] ?? '' ?></p>
+                                                                          </div>
+									  <div class="form-group">
+									    <label>Type your password again</label>
+									    <input type="password" class="form-control" id="sign-up-password-second" placeholder="Repeat your password" name="repeatPassword">
+                                                                            <p class="errorMes"><?= $_SESSION['errorMes']['repeatPassword'] ?? '' ?></p>
+                                                                          </div>
+									  <button type="submit" class="btn btn-primary" name="signup-submit">Sign Up</button>
+									  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+									</form>
+                                                                        <?= $_SESSION["openSignup"] ?? '' ?>                                                              
+                                                                        <?php unset($_SESSION["openSignup"])?>
+								</div>
+							</div>
+						</div>
+					</div>
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#login">Login</button>
+					<div class="modal fade" id="login" tabindex="-1" >
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h4 class="modal-title">Login</h4>
+							        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      									<span aria-hidden="true">&times;</span>
+    								</button>
+								</div>
+								<div class="modal-body">
+									<form action="/mywebsite.com/login" method="POST">
+									  <div class="form-group">
+									    <label >Username or Email</label>
+									    <input type="text" class="form-control" id="login-username" placeholder="Username or Email" name="usernameEmail">
+									  </div>
+									  <div class="form-group">
+									    <label>Password</label>
+									    <input type="password" class="form-control" id="login-password" placeholder="Password" name="password">
+									  </div>
+                                                                            <p class="errorMes"><?= $_SESSION["errorMes"]["login"] ?? ''?></p>
+									  <button type="submit" class="btn btn-primary" name="login-submit">Login</button>
+									  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+									</form>
+                                                                        <?= $_SESSION["openLogin"] ?? '' ?>                                                              
+                                                                        <?php unset($_SESSION["openLogin"])?>
+								</div>
+							</div>
+						</div>
+					</div>
+                                        <?php unset($_SESSION["errorMes"])?>
+                                        <?php elseif (!empty($_SESSION["user"])): ?>
+                                        <p style="color:white;">Welcome ! <?= $_SESSION["user"]["username"] ?></p>
+                                        <button type="button"><a href="/mywebsite.com/logout">Log out</a></button>
+                                        <?php endif;?>
+        </ul> 
         <div class="lds-spinner loading-wrapper"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
         <div class="page-content">
   

@@ -11,7 +11,7 @@
             if (!empty($_SERVER["REQUEST_URI"])) {
                 $url = trim($_SERVER["REQUEST_URI"], '/');
                 $url = explode('/',$url);
-                $this->controller = (isset($url[1]) && $url[1] != '') ? $url[1] . "Controller" : DEFAULT_CONTROLLER;
+                $this->controller = (!empty($url[1])) ? preg_replace('/\?.*/', '', $url[1])."Controller" : DEFAULT_CONTROLLER;
                 $this->action = isset($url[2]) ? $url[2] : DEFAULT_ACTION;
                 unset($url[0], $url[1], $url[2]);
                 $this->params = !empty($url) ? array_values($url) : []; 

@@ -68,12 +68,10 @@ class Model {
         $prepareParam = array_merge($prepareParam,$whereParam);
         $this->sql = "UPDATE $this->table SET $updateList $where ";
         $this->query($this->sql, $prepareParam, false);
-        $this->result = ($this->$stmt->rowCount() != 0) ? $this->$stmt->rowCount() : "No update operation";
     }
     public function delete($where = "",$whereParam = []){
-        $this->sql = "DELETE FROM $tbName $where ";
-        $this->query($this->sql,$whereParam,false);
-        $this->result = ($this->$stmt->rowCount() != 0) ? $this->$stmt->rowCount() : "No update operation";
+        $this->sql = "DELETE FROM $this->table $where ";
+        $this->query($this->sql,$whereParam,false);      
     }
     public function searchQuery($query,$multiple = false){
         $where = "WHERE";

@@ -4,7 +4,7 @@
 			<div class="col-md-3 col-12">
 				<ul>
                                     <li class="search-bar">
-                                        <form autocomplete="off" id="Amusement" class="search-form" action="http://localhost:81/mywebsite.com/restaurants" method="POST">
+                                        <form autocomplete="off" id="Amusement" class="search-form" action="http://localhost:81/mywebsite.com/amusement" method="POST">
                                             <input type="text" placeholder="Search..." name="search" id="search-input">
                                             <button type="submit"><i class="fas fa-search"></i></button>    
                                         </form>						
@@ -91,117 +91,35 @@
 				</ul>
 			</div>
 			<div class="col-md-9 col-12">
-				<div class="row">
+				<div class="row amusement-items">
+                                    <?php foreach($this->viewData["info"] as $info): ?>
 					<div class="col-md-4 col-12">
-						<a href="#">
+                                            <a class="amusement-detail" href="/mywebsite.com/amusement/detail/<?= $info["urlName"] ?>">
 							<div class="amusement-main">
-							  	<img src="https://via.placeholder.com/40x30" class="amusement-image" style="width:100%">
-									<div class="amusement-image-container">
-								    	<h4>LES TASSES</h4>
-								    	<p>Spin round and round, alone or with the family, in the spinning</p>
-								    	<button class="btn">ADD TO MY VISIT</button>
+                                                            <img src="/mywebsite.com/public/image/amusement/<?= $info["urlName"]?>/1.jpg" class="amusement-image detail" style="width:100%">
+									<div class=" detail amusement-image-container">
+                                                                        <h4 class="detail"><?= $info["name"]?></h4>
+                                                                        <p class="detail"><?= $info["shortDes"]?></p>
+								    	
 								  	</div>
-							</div>
+							</div>                          
 						</a>
+                                               <button class="btn">ADD TO MY VISIT</button>
 					</div>
-					<div class="col-md-4 col-12">
-						<a href="#">
-							<div class="amusement-main">
-							  	<img src="https://via.placeholder.com/40x30" class="amusement-image" style="width:100%">
-									<div class="amusement-image-container">
-								    	<h4>LES TASSES</h4>
-								    	<p>Spin round and round, alone or with the family, in the spinning</p>
-								    	<button class="btn">ADD TO MY VISIT</button>
-								  	</div>
-							</div>
-						</a>
-					</div>
-					<div class="col-md-4 col-12">
-						<a href="#">
-							<div class="amusement-main">
-							  	<img src="https://via.placeholder.com/40x30" class="amusement-image" style="width:100%">
-									<div class="amusement-image-container">
-								    	<h4>LES TASSES</h4>
-								    	<p>Spin round and round, alone or with the family, in the spinning</p>
-								    	<button class="btn">ADD TO MY VISIT</button>
-								  	</div>
-							</div>
-						</a>
-					</div>
-					<div class="col-md-4 col-12">
-						<a href="#">
-							<div class="amusement-main">
-							  	<img src="https://via.placeholder.com/40x30" class="amusement-image" style="width:100%">
-									<div class="amusement-image-container">
-								    	<h4>LES TASSES</h4>
-								    	<p>Spin round and round, alone or with the family, in the spinning</p>
-								    	<button class="btn">ADD TO MY VISIT</button>
-								  	</div>
-							</div>
-						</a>
-					</div>
-					<div class="col-md-4 col-12">
-						<a href="#">
-							<div class="amusement-main">
-							  	<img src="https://via.placeholder.com/40x30" class="amusement-image" style="width:100%">
-									<div class="amusement-image-container">
-								    	<h4>LES TASSES</h4>
-								    	<p>Spin round and round, alone or with the family, in the spinning</p>
-								    	<button class="btn">ADD TO MY VISIT</button>
-								  	</div>
-							</div>
-						</a>
-					</div>
-					<div class="col-md-4 col-12">
-						<a href="#">
-							<div class="amusement-main">
-							  	<img src="https://via.placeholder.com/40x30" class="amusement-image" style="width:100%">
-									<div class="amusement-image-container">
-								    	<h4>LES TASSES</h4>
-								    	<p>Spin round and round, alone or with the family, in the spinning</p>
-								    	<button class="btn">ADD TO MY VISIT</button>
-								  	</div>
-							</div>
-						</a>
-					</div>
-					<div class="col-md-4 col-12">
-						<a href="#">
-							<div class="amusement-main">
-							  	<img src="https://via.placeholder.com/40x30" class="amusement-image" style="width:100%">
-									<div class="amusement-image-container">
-								    	<h4>LES TASSES</h4>
-								    	<p>Spin round and round, alone or with the family, in the spinning</p>
-								    	<button class="btn">ADD TO MY VISIT</button>
-								  	</div>
-							</div>
-						</a>
-					</div>
-					<div class="col-md-4 col-12">
-						<a href="#">
-							<div class="amusement-main">
-							  	<img src="https://via.placeholder.com/40x30" class="amusement-image" style="width:100%">
-									<div class="amusement-image-container">
-								    	<h4>LES TASSES</h4>
-								    	<p>Spin round and round, alone or with the family, in the spinning</p>
-								    	<button class="btn">ADD TO MY VISIT</button>
-								  	</div>
-							</div>
-						</a>
-					</div>
-					<div class="col-md-4 col-12">
-						<a href="#">
-							<div class="amusement-main">
-							  	<img src="https://via.placeholder.com/40x30" class="amusement-image" style="width:100%">
-									<div class="amusement-image-container">
-								    	<h4>LES TASSES</h4>
-								    	<p>Spin round and round, alone or with the family, in the spinning</p>
-								    	<button class="btn">ADD TO MY VISIT</button>
-								  	</div>
-							</div>
-						</a>
-					</div>
+                                    <?php endforeach;?>
 				</div>
 			</div>
 		</div>
 	</div>
+    <div class=" amusement-loader overlay-loader">
+	<div class="loader">
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+	</div>
+</div>
 </div>

@@ -1,5 +1,4 @@
 $(document).ready(function(){
-    console.log("hello this is carousel.js");
     const slides = $('.image-slider-item');
     let currentIndex = 0;
     const captionList = $('.caption');

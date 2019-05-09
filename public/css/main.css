@@ -20,6 +20,10 @@ li{
     height:100%;
     position:relative;
 }
+/* error message login - signup*/ 
+.errorMes {
+    color:red;
+}
 /* menu */
 ul.topnav {
   list-style-type: none;
@@ -771,15 +775,14 @@ ul.topnav li.right {float: right;}
 /* loading */
 .lds-spinner {
   color: official;
-  display:block;
+  display:none;
   position: absolute;
   width:64px;
   height:64px;
   transform:translate(-50%,-50%);
   left:50%;
   top:50%;
-  z-index: 1;
-  
+  z-index:999;
 }
 .lds-spinner div {
   transform-origin: 32px 32px;
@@ -787,7 +790,7 @@ ul.topnav li.right {float: right;}
 }
 .lds-spinner div:after {
   content: " ";
-  display: none;
+  display: block;
   position: absolute;
   top: 3px;
   left: 29px;
@@ -870,6 +873,154 @@ ul.topnav li.right {float: right;}
     opacity: 0;
   }
 }
+/* loader for amusement page */
+.overlay-loader {
+	display: none;
+	margin: auto;
+	width: 188px;
+	height: 188px;
+	position: relative;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+.loader {
+	position: absolute;
+	left: 50%;
+	margin: auto;
+	width: 188px;
+	height: 188px;
+	animation-name: rotateAnim;
+		-o-animation-name: rotateAnim;
+		-ms-animation-name: rotateAnim;
+		-webkit-animation-name: rotateAnim;
+		-moz-animation-name: rotateAnim;
+	animation-duration: 0.4s;
+		-o-animation-duration: 0.4s;
+		-ms-animation-duration: 0.4s;
+		-webkit-animation-duration: 0.4s;
+		-moz-animation-duration: 0.4s;
+	animation-iteration-count: infinite;
+		-o-animation-iteration-count: infinite;
+		-ms-animation-iteration-count: infinite;
+		-webkit-animation-iteration-count: infinite;
+		-moz-animation-iteration-count: infinite;
+	animation-timing-function: linear;
+		-o-animation-timing-function: linear;
+		-ms-animation-timing-function: linear;
+		-webkit-animation-timing-function: linear;
+		-moz-animation-timing-function: linear;
+}
+.loader div {
+	width: 15px;
+	height: 15px;
+	border-radius: 50%;
+	border: 2px solid rgb(0,0,0);
+	position: absolute;
+	top: 4px;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;
+}
+.loader div:nth-child(odd) {
+	border-top: none;
+	border-left: none;
+}
+.loader div:nth-child(even) {
+	border-bottom: none;
+	border-right: none;
+}
+.loader div:nth-child(2) {
+	border-width: 4px;
+	left: 0px;
+	top: -8px;
+	width: 23px;
+	height: 23px;
+}
+.loader div:nth-child(3) {
+	border-width: 4px;
+	left: -2px;
+	top: 6px;
+	width: 34px;
+	height: 34px;
+}
+.loader div:nth-child(4) {
+	border-width: 6px;
+	left: -2px;
+	top: -8px;
+	width: 45px;
+	height: 45px;
+}
+.loader div:nth-child(5) {
+	border-width: 6px;
+	left: -2px;
+	top: 8px;
+	width: 60px;
+	height: 60px;
+}
+.loader div:nth-child(6) {
+	border-width: 8px;
+	left: 0px;
+	top: -8px;
+	width: 75px;
+	height: 75px;
+}
+.loader div:nth-child(7) {
+	border-width: 8px;
+	left: 0px;
+	top: 11px;
+	width: 94px;
+	height: 94px;
+}
+
+
+@keyframes rotateAnim {
+	from {
+		transform: rotate(360deg);
+	}
+	to {
+		transform: rotate(0deg);
+	}
+}
+
+@-o-keyframes rotateAnim {
+	from {
+		-o-transform: rotate(360deg);
+	}
+	to {
+		-o-transform: rotate(0deg);
+	}
+}
+
+@-ms-keyframes rotateAnim {
+	from {
+		-ms-transform: rotate(360deg);
+	}
+	to {
+		-ms-transform: rotate(0deg);
+	}
+}
+
+@-webkit-keyframes rotateAnim {
+	from {
+		-webkit-transform: rotate(360deg);
+	}
+	to {
+		-webkit-transform: rotate(0deg);
+	}
+}
+
+@-moz-keyframes rotateAnim {
+	from {
+		-moz-transform: rotate(360deg);
+	}
+	to {
+		-moz-transform: rotate(0deg);
+	}
+}
+/* loader ends */
 .resInfo {
     width:100%;
 }

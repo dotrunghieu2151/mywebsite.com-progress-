@@ -1,0 +1,15 @@
+<?php foreach($this->viewData["info"] as $info): ?>
+					<div class="col-md-4 col-12">
+                                            <a class="amusement-detail" href="/mywebsite.com/amusement/detail/<?= $info["urlName"] ?>">
+							<div class="amusement-main">
+                                                            <img src="/mywebsite.com/public/image/amusement/<?= $info["urlName"]?>/1.jpg" class="amusement-image detail" style="width:100%">
+									<div class=" detail amusement-image-container">
+                                                                        <h4 class="detail"><?= $info["name"]?></h4>
+                                                                        <p class="detail"><?= $info["shortDes"]?></p>
+								    	
+								  	</div>
+							</div>
+						</a>
+                                            <button class="btn">ADD TO MY VISIT</button>
+					</div>
+<?php endforeach;?>

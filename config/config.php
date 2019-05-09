@@ -10,6 +10,8 @@
     define("MODEL", APP . "model" . DS);
     define("LIB", APP . "library" . DS);
     define("HELPERS", LIB . "helpers" . DS);
+    // domain name
+    define("DOMAIN","http://localhost:81");
     // default request constants
     define("DEFAULT_CONTROLLER", "homeController");
     define("DEFAULT_ACTION", "index");
@@ -22,6 +24,7 @@
     define("DBCHARSET","utf8mb4");
     // pagination settings
     define("resultPerPage",3);
+    define("amusementPerLoad",12);
     $modules = [ROOT,CONFIG,CONTROLLER,VIEW,MODEL,CORE,LIB,HELPERS];
     set_include_path(get_include_path() . PATH_SEPARATOR . implode(PATH_SEPARATOR, $modules));
     spl_autoload_register("spl_autoload");

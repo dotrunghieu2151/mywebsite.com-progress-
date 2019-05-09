@@ -1,73 +1,4 @@
-class LoadAjax{
-    constructor(contentDiv,loadAni,data="ajax",method="POST"){
-        this.contentDiv = contentDiv;
-        this.loadAni = loadAni;
-        this.data = data;
-        this.method = method;
-    }
-    setURL(url){
-        this.requestURL = url;
-        return this;
-    }
-    get(){
-        return new Promise((resolve, reject) => {
-          const req = new XMLHttpRequest();
-          req.open(this.method, this.requestURL);
-          req.setRequestHeader('Content-type','application/x-www-form-urlencoded'); 
-          req.onload = () => req.status === 200 ? resolve(req.response) : reject(Error(req.statusText));
-          req.onerror = (e) => reject(Error(`Network Error: ${e}`));
-          req.send("getData="+JSON.stringify(this.data));
-        })
-                .then((res) => {
-                    return JSON.parse(res);
-        })
-                .catch(error => console.log(error) );
-                
-    }
-    async loadPage(is_pushState = true){
-        if(is_pushState === true) {
-           if(this.requestURL != window.location.href) {
-                this.contentDiv.innerHTML = '';
-                this.loadAni.style.display = "block";
-                let response =  await this.get();
-                this.loadAni.style.display = "none";
-                document.title = response.pageTitle;
-                this.contentDiv.innerHTML = response.html;
-                if (response.scriptsrc !== null) this.loadScript(response.scriptsrc);
-                window.history.pushState({path:this.requestURL,activelink:document.querySelector(".active").id},
-                                             null,
-                                             this.requestURL);
-                }
-            }
-        else if (is_pushState === false) {
-            this.contentDiv.innerHTML = ''; 
-            this.loadAni.style.display = "block";
-            let response =  await this.get();
-            this.loadAni.style.display = "none";
-            document.title = response.pageTitle;
-            this.contentDiv.innerHTML = response.html;
-            if (response.scriptsrc !== null) this.loadScript(response.scriptsrc);   
-        }
-    }
-    loadScript(scriptsrc){
-        console.log("loading script....");
-        let js_script = document.createElement('script');
-        if (document.querySelector(`script[src="${scriptsrc}"]`) != null ){
-            document.querySelector(`script[src="${scriptsrc}"]`).outerHTML = '';
-        }
-        js_script.type = 'text/javascript';
-        js_script.src = scriptsrc;
-        js_script.async = true;
-        document.getElementsByTagName('head')[0].appendChild(js_script);
-    }   
-};
-function activeState(element){
-        let activeEle = document.querySelector(".active");
-        activeEle != null ? activeEle.classList.remove("active") : '';
-        element.classList.add("active");
-    };
 document.addEventListener("DOMContentLoaded",function(){
-    console.log("this is main.js");
     // for active 
     const firstPageURL = window.location.href; 
     const firstActiveEle = document.querySelector(".active");
@@ -97,7 +28,6 @@ document.addEventListener("DOMContentLoaded",function(){
         });
     };
     pageContent.addEventListener("click", function(e){
-        // for restaurant detail a link
        if (e.target.classList.contains("restaurant-detail")){
            e.preventDefault();
            let restaurantURL = e.target.href;
@@ -108,6 +38,13 @@ document.addEventListener("DOMContentLoaded",function(){
             e.preventDefault();
             let restaurantURL = e.target.parentNode.href;
             app.setURL(restaurantURL).loadPage();
+        }
+        // for amusement link 
+        if (e.target.classList.contains("detail")){        
+           e.preventDefault();
+           setCookie("scrollPosition",$(window).scrollTop(),0.1);
+           let amusementURL = $(e.target).closest(".amusement-detail").attr("href");
+           app.setURL(amusementURL).loadPage();        
         }
         // for pagination
         if (e.target.classList.contains("pagination-link")) {

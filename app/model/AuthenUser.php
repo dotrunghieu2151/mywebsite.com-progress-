@@ -62,7 +62,7 @@ class AuthenUser extends Model{
                  "expire"=>$expireDate];
      }
      public function insertToken($token){
-         $this->deleteToken();
+         $this->deleteToken($this->email);
          $this->insert(["accountEmail"=>$this->email,
                        "selector"=>$token["selector"],
                        "validator"=>$token["hashedToken"],
@@ -77,8 +77,8 @@ class AuthenUser extends Model{
         if(!password_verify($token, $this->getResult()[0]["validator"])) {return false;}
         return true;
     }
-    public function deleteToken(){
+    public function deleteToken($email){
         $this->table = "verifyaccount";
-        $this->delete("WHERE accountEmail = :email",[":email"=>$this->email]);
+        $this->delete("WHERE accountEmail = :email",[":email"=>$email]);
     }
 }

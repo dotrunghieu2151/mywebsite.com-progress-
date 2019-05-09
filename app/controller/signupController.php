@@ -86,6 +86,7 @@ class signupController extends Controller {
             exit();
         }
         $this->model->setActiveAccount($userEmail);
+        $this->model->deleteToken($userEmail);
         echo "account active set";
     }
 }

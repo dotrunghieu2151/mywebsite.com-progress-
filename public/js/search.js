@@ -40,7 +40,7 @@ $(document).ready(function(){
        let offset = 0;
        let endOfData = false;
       $(window).scroll(async function(){
-         if($(window).scrollTop() >= $(document).height() - $(window).height()) {
+         if($(window).scrollTop() + $(window).height() + 50 >= $(document).height() ) {
              if (endOfData) {
                  return false;
              }
@@ -48,10 +48,10 @@ $(document).ready(function(){
                 offset += 12;
                 const showmore = new LoadAjax(amusementItems,null, offset,"POST");
                 amusementLoader.style.display = "block";
-                const response = await showmore.setURL(window.location.href).get();
+                const response = await showmore.setURL(window.location.href).get();                
                 amusementLoader.style.display = "none";
                 if (response.html !== "no result found") {
-                     amusementItems.innerHTML += response.html;
+                     amusementItems.innerHTML += response.html;             
                 } 
                 else if (response.html === "no result found") {
                     endOfData = true;
@@ -59,9 +59,12 @@ $(document).ready(function(){
             }
          } 
       });
-      if (getCookie("scrollPosition")) {
-          $(window).scrollTop(getCookie("scrollPosition"));
-          eraseCookie("scrollPosition");
-       }
+        if (getCookie("scrollPosition")) {
+            $(window).scrollTop(getCookie("scrollPosition"));
+            $('html, body').animate({
+                   scrollTop: getCookie("scrollPosition")
+            }, 500);
+            eraseCookie("scrollPosition");
+        }
    }
 });

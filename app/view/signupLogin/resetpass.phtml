@@ -1,0 +1,17 @@
+<?php $selector = $this->viewData["token"]["selector"];
+      $validator = $this->viewData["token"]["validator"];
+      $url = $this->viewData["token"]["url"];
+?>
+<?php if (ctype_xdigit($selector) === false || 
+          ctype_xdigit($validator)=== false ): ?>
+ <p class="errorMes">We could not validate your request! Please make sure this is the right link</p>
+ <?php elseif(ctype_xdigit($selector) !== false && ctype_xdigit($validator)!== false): ?>
+ <form action="<?= $url ?>" method="POST">
+     <input type="password" name="password" placeholder="Enter new password...">
+     <input type="password" name="repeatPassword" placeholder="repeat password...">
+     <button type="submit" name="resetpass-submit">submit</button>
+ </form>
+ <p class="errorMes"><?= $_SESSION['message'] ?? '' ?></p>
+ <?php unset($_SESSION["message"]) ?>
+ <?php endif; ?>
+

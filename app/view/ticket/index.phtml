@@ -1,0 +1,175 @@
+<div id="lay-events"  style="background-image: url(/mywebsite.com/public/img/image2.jpg);" data-stellar-background-ratio="0.5">
+			<div class="lay-overlay"></div>
+			<div class="container">
+				<div class="row lay-heading ">
+					<div class="col-12 to-animate text-center">
+						<h2 class="heading">Ticket price list</h2>
+						<p class="sub-heading">Tax is not included</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="lay-event to-animate-2">
+							<h3>Age discount</h3>  
+                                                        <p></p>
+							<h5>Children</h5>
+                                                        <span class="lay-event-meta">-5%</span>
+                                                        <h5>Senior citizens</h5>
+                                                        <span class="lay-event-meta">-10%</span>
+                                                        <h5>Adults</h5>
+                                                        <span class="lay-event-meta">Standard price</span>
+							
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="lay-event to-animate-2">
+							<h3>Weekend Deals</h3>
+                                                        <h5>Saturday</h5>
+							<span class="lay-event-meta">-10%</span>
+                                                         <h5>Sunday</h5>
+							<span class="lay-event-meta">-10%</span>							
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="lay-event to-animate-2">
+							<h3>Voucher</h3>
+                                                        <p>Participate in our weekly events to earn vouchers !</p>
+                                                        <h5>levels:</h5>
+                                                        <h6>Beginner</h6>
+                                                        <span class="lay-event-meta">-5%</span>
+                                                        <h6>Frequent visitor</h6>
+                                                        <span class="lay-event-meta">-10%</span>
+                                                        <h6>Enthusiast</h6>
+                                                        <span class="lay-event-meta">-15%</span>	
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+<?php if (isset($_GET["pay"]) && $_GET["pay"] === "success"):?>
+<script> alert("Transaction complete! Thank you for using our service")</script>
+<?php elseif(isset($_GET["pay"]) && $_GET["pay"] === "failed"): ?>
+<script> alert("Transaction failed! please try again!")</script>
+<?php endif;?>
+<?php if (!empty($this->viewData["ticketDetail"])):?>
+<?php foreach($this->viewData["ticketDetail"] as $info):?>
+<div id="<?= $info["id"]?>" class="ticket-showcase ">
+	<div class="container-fluid">
+		<div class="row no-gutters">
+		   		<div class="col-md-6 col-12">
+					<section id="left">
+                                             <img src="/mywebsite.com/public/image/amusement/<?= $info["urlName"]?>/1.jpg">
+						<div class="col-md-6 col-12 text-center">
+                                                       
+							<div id="head">
+								<h1><?= $info["name"]?></h1>
+								<p><?= $info["shortDes"]?></p>
+							</div>                                                       
+							<h3>Entry fee <?= $info["price"] ?>$</h3>
+						</div>
+					</section>
+				</div>
+				<div class="col-md-6 col-12 text-center">
+					<section id="right">
+							<h1>Purchase</h1>
+							<form class="ticket-form" action="/mywebsite.com/ticket/handle/<?= $info["id"]?>" method="POST">
+								<div id="form-card" class="form-field">
+									<div class="row">
+                                                                            <div class="col-xl-4 col-12">
+                                                                                    <label>Children(90-130cm):</label>
+                                                                                    <input name="qc" type="number" max="<?= $info["quantity"]?>"  min="0" 
+                                                                                           value="<?= $_SESSION["ticketDetail"][$info["id"]]["qc"] ?? 0 ?>" >
+                                                                        </div>
+							            <div class="col-xl-4 col-12">
+							                <label>Adult(130cm and above):</label>
+							                <input name="qa" type="number" max="<?= $info["quantity"]?>" min="0"  
+                                                                               value="<?= $_SESSION["ticketDetail"][$info["id"]]["qa"] ?? 0 ?>">
+							            </div>
+							            <div class="col-xl-4 col-12">
+							                <label>Senior citizens(60yr and above):</label>
+							                <input name="qs" type="number"  max="<?= $info["quantity"]?>" min="0"
+                                                                               value="<?= $_SESSION["ticketDetail"][$info["id"]]["qs"] ?? 0 ?>">
+                                                                    </div>
+                                                                    </div>
+                                                                     <div class="errorMes <?= empty($_SESSION['errorTicket'][$info["id"]]["q"]) ? "hide" : "show"?>">
+                                                                        <div class="errorDetail">
+                                                                            <?= $_SESSION['errorTicket'][$info["id"]]["q"] ?? '' ?>                  
+                                                                        </div>
+                                                                    </div>
+                                                            <input name="date" type="date" value="<?= $_SESSION["ticketDetail"][$info["id"]]["date"] ?? "" ?>" >
+                                                            <div class="errorMes <?= empty($_SESSION['errorTicket'][ $info["id"]]["date"]) ? "hide" : "show"?>">
+                                                                <div class="errorDetail">
+                                                                    <?= $_SESSION['errorTicket'][$info["id"]]["date"] ?? '' ?>                  
+                                                                </div>
+                                                            </div>
+								</div>
+                                                            <?php unset($_SESSION["errorTicket"][$info["id"]])?>
+                                                            <h3 class="total-price">
+                                                                <?= isset($_SESSION["ticketDetail"][$info["id"]]["totalPrice"]) ? 
+                                                                "Total price: {$_SESSION["ticketDetail"][$info["id"]]["totalPrice"]}$" : "" ?>
+                                                            </h3>
+                                                            <p class="wk-deal"> 
+                                                                <?= isset($_SESSION["ticketDetail"][$info["id"]]["wkDiscount"]) ? 
+                                                                "Weekend Deal: {$_SESSION["ticketDetail"][$info["id"]]["wkDiscount"]}%" : ''?>
+                                                            </p>
+                                                            <p class="age-discount">
+                                                                    <?= isset($_SESSION["ticketDetail"][$info["id"]]["ageDiscount"]) ? 
+                                                                    "Age discount: {$_SESSION["ticketDetail"][$info["id"]]["ageDiscount"]}%": ''?>
+                                                            </p>
+                                                            <button class="ticket-update" type="submit" name="update-ticket">Update</button>
+                                                            <button class="ticket-remove" type="submit" name="remove-ticket">Remove</button>
+                                                            <p class="qError" style="color:red;"></p>
+                                                            <p class="dError" style="color:red;"></p>
+                                                            <p class="loading">Loading</p>
+							</form>
+					</section>
+				</div>
+		</div>
+	</div>
+</div>
+<?php endforeach;?>
+<button type="button" id="check-out-btn" class="btn btn-primary" data-toggle="modal" data-target="#checkoutForm">
+  Check out
+</button>
+<div class="modal fade" id="checkoutForm">
+	<div class="container">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<h3>Check Out</h3>
+		</div>
+	</div>
+	<div class="modal-body">
+			<div class="row">	  			                            
+			  <div class="col-md-12 col-12">
+			      <h4>Tickets<span class="price" style="color:black"></span></h4>
+                              <div id="products">
+                                <?php if(!empty($_SESSION["ticketDetail"])):?>
+                                    <?php foreach($_SESSION["ticketDetail"] as $info): ?>
+                                     <p id="product<?= $info["id"]?>"><?= $info["name"] ?>
+                                         <span class='price'>
+                                            <?= $info["totalPrice"]?> (<?= $info["qc"]?> x children, <?= $info["qa"]?> x adults, <?= $info["qs"]?> x seniors)
+                                         </span>
+                                     </p>
+                                    <?php endforeach;?>
+                                <?php endif;?>
+                              </div>
+			      <hr>
+                              <p>Total <span class="price" style="color:black"><b id="sum"><?= $_SESSION["sumOfTicket"] ?? 0 ?>$</b></span></p>
+			  </div>                        
+			 </div>
+                        <div class="row">
+                           <div class="col-md-9 col-12">			    
+                                <div id="paypal-button-container"></div> 
+                          </div>
+                        </div>
+            <div class="row">
+                    <a href="/mywebsite.com/ticket/pay" class="btn btn-primary">Pay Now</a>
+            </div>
+		</div>
+	</div>
+</div>
+<?php endif; ?>
+<?php if(isset($_GET["ticket"])&& $_GET["ticket"] === "empty"):?>
+<script> alert("Please update your tickets first")</script>
+<?php endif;?>
+

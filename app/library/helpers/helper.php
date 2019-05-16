@@ -22,8 +22,7 @@
             $values = implode(',',array_values($array));
             return ["keys"=>$keys,"values"=>$values];
         }
-        public static function debug($item){
-            echo "<pre>";
-            var_dump($item);
+        public static function isWeekend($date) {
+            return (date('N', strtotime($date)) >= 6);
         }
     }

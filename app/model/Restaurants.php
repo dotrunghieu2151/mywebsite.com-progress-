@@ -7,7 +7,7 @@ class Restaurants extends Model {
     }
     public function getName($query){
         $this->sql = "SELECT name FROM $this->table WHERE name LIKE :query LIMIT 10";  
-        $this->query($this->sql,[":query"=>"%$query%"]);
+        $this->query($this->sql,[":query"=>"$query%"]);
     }
     public function getRestaurant($currPage,$where = "",$whereParam = []){
        $offset = ($currPage-1)*resultPerPage;

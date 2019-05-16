@@ -4,7 +4,7 @@
 			<div class="col-md-3 col-12">
 				<ul>
                                     <li class="search-bar">
-                                        <form autocomplete="off" id="Amusement" class="search-form" action="http://localhost:81/mywebsite.com/amusement" method="POST">
+                                        <form autocomplete="off" id="Amusement" class="search-form" action="/mywebsite.com/amusement" method="POST">
                                             <input type="text" placeholder="Search..." name="search" id="search-input">
                                             <button type="submit"><i class="fas fa-search"></i></button>    
                                         </form>						
@@ -91,6 +91,7 @@
 				</ul>
 			</div>
 			<div class="col-md-9 col-12">
+                                <?php if (isset($this->viewData["info"])):?>
 				<div class="row amusement-items">
                                     <?php foreach($this->viewData["info"] as $info): ?>
 					<div class="col-md-4 col-12">
@@ -99,15 +100,29 @@
                                                             <img src="/mywebsite.com/public/image/amusement/<?= $info["urlName"]?>/1.jpg" class="amusement-image detail" style="width:100%">
 									<div class=" detail amusement-image-container">
                                                                         <h4 class="detail"><?= $info["name"]?></h4>
-                                                                        <p class="detail"><?= $info["shortDes"]?></p>
-								    	
+                                                                        <p class="detail"><?= $info["shortDes"]?></p>								    	
 								  	</div>
 							</div>                          
 						</a>
-                                               <button class="btn">ADD TO MY VISIT</button>
+                                            <?php if($info["quantity"] != 0): ?>
+                                                <?php if( !in_array($info["id"],($_SESSION["ticket"] ?? []))):?>
+                                                <a  class="btn  ticket-btn add-ticket"
+                                                    href="/mywebsite.com/amusement/addticket/?id=<?= $info["id"] ?>">ADD TO MY VISIT</a>
+                                                <?php elseif( in_array($info["id"],($_SESSION["ticket"] ?? []))): ?>
+                                                <a  class="btn  ticket-btn add-ticket"
+                                                    href="/mywebsite.com/amusement/removeticket/?id=<?= $info["id"] ?>">REMOVE FROM MY VISIT</a>
+                                                <?php endif;?>
+                                            <?php elseif(is_null($info["quantity"])): ?>
+                                            <button class="btn ticket-btn">Free</button>
+                                            <?php elseif($info["quantity"] == 0): ?>
+                                            <button class="btn ticket-btn">Out of tickets</button>
+                                            <?php endif;?>
 					</div>
                                     <?php endforeach;?>
 				</div>
+                                <?php else: ?>
+                                <h3>Sorry there was no result</h3>
+                                <?php endif; ?> 
 			</div>
 		</div>
 	</div>

@@ -19,7 +19,7 @@ class restaurantsController extends Controller {
         elseif ($page >$totalPages){
             $page = $totalPages;
         }
-        $link = "http://localhost:81/mywebsite.com/restaurants/show/page";
+        $link = DOMAIN."/mywebsite.com/restaurants/show/page";
         $link = View::paginate($totalPages,$page,$link);
         $this->model->getRestaurant($page);
         $assoParam = helper::createAssoParams(["pageTitle","resInfo","links","jsScript"],
@@ -42,7 +42,7 @@ class restaurantsController extends Controller {
             $this->model->count($filteredQuery["whereQuery"],$filteredQuery["whereParam"]);
             $totalResults = (int)$this->model->getResult()[0]["COUNT"];
             if ($totalResults == 0) {
-                $this->view("error".DS."noresult",["pageTitle"=>"Mywebsite"]);
+                $this->view("restaurants".DS."index",["pageTitle"=>"Mywebsite","jsScript"=>"search.js"]);
                 exit();
             }
             $totalPages = ceil($totalResults/resultPerPage);
@@ -52,7 +52,7 @@ class restaurantsController extends Controller {
             elseif ($page >$totalPages){
                 $page = $totalPages;
             }
-            $link = "http://localhost:81/mywebsite.com/restaurants/search/?q={$_GET["q"]}&p=";
+            $link = DOMAIN."/mywebsite.com/restaurants/search/?q={$_GET["q"]}&p=";
             $link = View::paginate($totalPages, $page, $link);
             $this->model->getRestaurant($page,$filteredQuery["whereQuery"],$filteredQuery["whereParam"]);
             $assoParam = helper::createAssoParams(["pageTitle","resInfo","links","jsScript"],

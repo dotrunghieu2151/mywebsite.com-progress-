@@ -35,7 +35,7 @@ class amusementController extends Controller {
                 echo json_encode(["html"=>"no result found"]);
                 exit();
             } elseif ($totalResults == 0) {
-                $this->view("error".DS."noresult",["pageTitle"=>"Mywebsite"]);
+                $this->view("amusement".DS."index",["pageTitle"=>"Mywebsite","jsScript"=>"search.js"]);
                 exit();
             }
             $this->model->getAmusement($offset,$q["whereQuery"],$q["whereParam"]);
@@ -60,5 +60,43 @@ class amusementController extends Controller {
         $assoParam = helper::createAssoParams(["pageTitle","detail","jsScript"],
                 ["Mywebsite | Amusements",$this->model->getResult(),"carousel-detail.js"]);
         $this->view("amusement".DS."detail",$assoParam);
+    }
+    public function addticket(){
+        if(filter_has_var(INPUT_GET, 'id') && preg_match("/[1-9]/",$_GET["id"])){
+           if(!isset($_SESSION["ticket"])) {
+              $_SESSION["ticket"] = [$_GET["id"]];
+           } elseif (!in_array($_GET["id"], $_SESSION["ticket"])) {
+               $_SESSION["ticket"][] = $_GET["id"];
+           }           
+           if (filter_has_var(INPUT_POST, "getData")) {
+               echo json_encode(["ticketNum"=>count($_SESSION["ticket"])]);
+               exit();
+           }
+        }
+        header("Location: /mywebsite.com/amusement");
+    }
+    public function removeticket(){
+       if(filter_has_var(INPUT_GET,"id") && 
+          preg_match("/[1-9]/",$_GET["id"]) &&
+          isset($_SESSION["ticket"])) {
+          // remove id from session
+          $_SESSION["ticket"] = array_diff($_SESSION["ticket"], [$_GET["id"]]);
+          if (isset($_SESSION["ticketDetail"][$_GET["id"]])) {
+            // subtract sum of all ticket
+             if (isset($_SESSION["sumOfTicket"])){
+                 $_SESSION["sumOfTicket"] -= $_SESSION["ticketDetail"][$_GET["id"]]["totalPrice"];
+            } 
+            unset($_SESSION["ticketDetail"][$_GET["id"]]);
+            $_SESSION["ticketDetail"] = array_filter($_SESSION["ticketDetail"]);
+          }
+       }
+        if (filter_has_var(INPUT_POST, "getData")) {
+               echo json_encode(["ticketNum"=>count($_SESSION["ticket"])]);
+               exit();
+        }
+        header("Location: /mywebsite.com/amusement");
+    }
+    public function checkout(){
+        
     }
 }

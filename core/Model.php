@@ -34,9 +34,25 @@ class Model {
             $this->result = ($this->stmt->rowCount() != 0) ? $this->stmt->fetchAll() : "No results found";
         }
     }
-    public function getAll(){
-        $this->sql = "SELECT * FROM $this->table";
-        $this->query($this->sql,[],true); 
+    public function getAll($where= "", $whereParam = []){
+        $this->sql = "SELECT * FROM $this->table $where";
+        $this->query($this->sql,$whereParam); 
+    }
+    public function is_exist($id) {
+        $this->sql = "SELECT * FROM $this->table WHERE id = :id";
+        $this->query($this->sql,[":id"=>$id]);
+        If ($this->getResult() === "No results found") return false;
+        else return true;
+    }
+    public function getByid($idArray = []){
+       $where = "WHERE";
+       $whereParam = [];
+       foreach ( $idArray as $id) {
+           $where .= " id = :$id OR";
+           $whereParam[":$id"] = $id;
+       }
+       $where = rtrim($where, "OR");
+       $this->getAll($where,$whereParam);
     }
     public function count($where = "",$whereParams = []) {
         $this->sql = "SELECT COUNT(*) AS COUNT FROM $this->table $where";

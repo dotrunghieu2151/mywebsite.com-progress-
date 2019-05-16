@@ -45,9 +45,11 @@ class signupController extends Controller {
                 exit();
             }
             $this->model->addUser();
-            $token = AuthenUser::setToken();
-            $this->model->insertToken($token);
-            $verifyURL = DOMAIN."/mywebsite.com/signup/verify/?s="."{$token["selector"]}&v={$token["validator"]}";
+            $this->model("AuthenToken");
+            $token = AuthenToken::setToken();
+            $this->model->deleteTokenByEmail($email);
+            $this->model->insertToken($email,$token);
+            $verifyURL = DOMAIN."/mywebsite.com/signup/verify/?"."s={$token["selector"]}&v={$token["validator"]}";
             // send email
             $to = $email;
             $subject = "Verify your account for mywebsite.com";
@@ -60,15 +62,14 @@ class signupController extends Controller {
                 . "Content-type: text/html\r\n"; // to display html in the email
             $sendmail = mail($to, $subject, $message, $headers);
             if ($sendmail) {
-                echo 'mail sent. Check your email';
+                $_SESSION["signup-message"] = "Email sent! Please verify your account";
+                $_SESSION["openSignup"] = "<script> $(document).ready(function(){ $('#sign-up').modal('show'); }); </script>";              
             } else {
-                echo 'error';
-            }       
+                $_SESSION["signup-message"] = " We couldn't send email! Please try again";
+                $_SESSION["openSignup"] = "<script> $(document).ready(function(){ $('#sign-up').modal('show'); }); </script>";
+            }
         }
-        else {
-            header("Location: /mywebsite.com/home");
-            exit();
-        }
+         header("Location: /mywebsite.com/home");
     }
     public function verify(){
         $selector = $_GET["s"];
@@ -78,15 +79,18 @@ class signupController extends Controller {
             echo "We could not validate your request! Please make sure this is the right link";
             exit();
         }
-        $this->model("AuthenUser");
-        $tokenVerify = $this->model->checkToken($selector,$validator);
-        $userEmail = $this->model->getResult()[0]["accountEmail"];
+        $this->model("AuthenToken");
+        $tokenVerify = $this->model->checkToken($selector,$validator);      
         if(!$tokenVerify){
             echo "You need to re-submit your request";
             exit();
         }
-        $this->model->setActiveAccount($userEmail);
-        $this->model->deleteToken($userEmail);
-        echo "account active set";
-    }
+        $userEmail = $this->model->getResult()[0]["accountEmail"];
+        $this->model->deleteTokenByEmail($userEmail);
+        $this->model("AuthenUser",["","",$userEmail]);
+        $this->model->setActiveAccount();
+        $_SESSION["signup-message"] = "Account verified, Please login";
+        $_SESSION["openLogin"] = "<script> $(document).ready(function(){ $('#login').modal('show'); }); </script>";              
+        header("Location: /mywebsite.com/home");  
+        } 
 }

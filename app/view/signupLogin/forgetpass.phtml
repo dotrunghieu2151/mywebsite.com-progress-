@@ -1,0 +1,6 @@
+<form action="/mywebsite.com/login/forgetpass" method="POST">
+    <input type="email" placeholder="Your user email..." name="email">
+    <button type="submit" name="forgetpass-submit">Submit</button>
+    <p class="errorMes"><?= $_SESSION["message"] ?? ""?></p>
+    <?php unset($_SESSION["message"])?>
+</form>

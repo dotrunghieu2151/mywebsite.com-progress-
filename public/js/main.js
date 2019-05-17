@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded",function(){
             e.preventDefault();
             activeState(this);
             let url = this.href;
-            app.setURL(url).loadPage();          
+            app.setURL(url).loadPage();        
         });
     };
     pageContent.addEventListener("click", function(e){

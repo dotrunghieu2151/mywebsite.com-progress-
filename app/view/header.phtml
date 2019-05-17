@@ -119,7 +119,7 @@
 										  <button type="submit" name="signup-submit" class="btn btn-primary">Sign Up</button>
 										  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 										</form>
-                                                                                <?= $_SESSION["signup-message"]?>
+                                                                                <?= $_SESSION["signup-message"] ?? ""?>
                                                                                 <?php unset($_SESSION["signup-message"])?>                                                                          
                                                                                 <?= $_SESSION["openSignup"] ?? '' ?>                                                              
                                                                                 <?php unset($_SESSION["openSignup"])?>

@@ -65,8 +65,8 @@ class loginController extends Controller {
                 . " ignore this email</p>"
                 . "<p>Here is your password reset link: </br>"
                 . "<a href='$verifyURL' >$verifyURL</a></p>";
-            $headers = "From: spadar dante<dante.bloodhunter@gmail.com>\r\n"
-                . "Reply-To: dante.bloodhunter@gmail.com\r\n"
+            $headers = "From: test test <testmywebsite9@gmail.com\r\n"
+                . "Reply-To: testmywebsite9@gmail.com\r\n"
                 . "Content-type: text/html\r\n"; // to display html in the email
             $sendmail = mail($to, $subject, $message, $headers);
             if ($sendmail) {

@@ -97,12 +97,13 @@ class ticketController extends Controller {
         header("Location: /mywebsite.com/ticket"); 
     }
     public function pay() {
-        if (empty($_SESSION["ticketDetail"]) || empty($_SESSION["sumOfTicket"])) {
-            header("Location: /mywebsite.com/ticket?ticket=empty");           
-            exit();
-        } else {
-            header("Location: /mywebsite.com/pay");
-            exit();
+         foreach ($_SESSION["ticket"] as $key => $ticketId) {
+                if (!isset($_SESSION["ticketDetail"][$ticketId])) {
+                   $_SESSION["ticketError"] = "Please update all ticket details first!";
+                   header("Location: /mywebsite.com/ticket");
+                   exit();
+                }
         }
+        header("Location: /mywebsite.com/pay");      
     }
 }

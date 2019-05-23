@@ -3,8 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/D:/Program%20Files/XAMPP/htdocs/mywebsite.com/app/view/ticket/index.phtml</file>
             <file>file:/D:/Program%20Files/XAMPP/htdocs/mywebsite.com/app/view/home/index.phtml</file>
+            <file>file:/D:/Program%20Files/XAMPP/htdocs/mywebsite.com/core/Model.php</file>
+            <file>file:/D:/Program%20Files/XAMPP/htdocs/mywebsite.com/config/config.php</file>
             <file>file:/D:/Program%20Files/XAMPP/htdocs/mywebsite.com/public/css/main.css</file>
+            <file>file:/D:/Program%20Files/XAMPP/htdocs/mywebsite.com/app/controller/loginController.php</file>
+            <file>file:/D:/Program%20Files/XAMPP/htdocs/mywebsite.com/app/controller/payController.php</file>
+            <file>file:/D:/Program%20Files/XAMPP/htdocs/mywebsite.com/app/controller/ticketController.php</file>
+            <file>file:/D:/Program%20Files/XAMPP/htdocs/mywebsite.com/app/model/Customer.php</file>
+            <file>file:/D:/Program%20Files/XAMPP/htdocs/mywebsite.com/app/library/helpers/helper.php</file>
             <file>file:/D:/Program%20Files/XAMPP/htdocs/mywebsite.com/app/view/header.phtml</file>
         </group>
     </open-files>

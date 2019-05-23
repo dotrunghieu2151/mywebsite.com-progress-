@@ -345,7 +345,7 @@ li{
 #lay-about .lay-text {
   padding: 2em 6em;
   text-align: left;
-  background: #130d08 url(../img/wood_1.png) repeat;
+  background: #130d08 url(/mywebsite.com/public/img/wood_1.png) repeat;
 }
 @media screen and (max-width: 1200px) {
   #lay-about .lay-text {
@@ -498,7 +498,7 @@ li{
 }
 #lay-featured {
   padding: 7em 0;
-  background: #130d08 url(img/wood_1.png) repeat;
+  background: #130d08 url(/mywebsite.com/public/img/wood_1.png) repeat;
 }
 @media screen and (max-width: 768px) {
   #lay-featured {
@@ -515,7 +515,7 @@ li{
   width: 64px;
   position: absolute;
   content: "";
-  background: url(img/1.png) no-repeat;
+  background: url(/mywebsite.com/public/img/1.png) no-repeat;
   top: 0;
   left: 50%;
   margin-top: -50px;
@@ -806,8 +806,7 @@ li{
 }
 .errorDetail {
     margin-bottom: 10px;
-    width:250px; 
-    height:30px;
+    width:100%;
     background-color:#ff3333;
     color:#fff;
     text-align: center;

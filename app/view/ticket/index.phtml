@@ -46,11 +46,6 @@
 				</div>
 			</div>
 		</div>
-<?php if (isset($_GET["pay"]) && $_GET["pay"] === "success"):?>
-<script> alert("Transaction complete! Thank you for using our service")</script>
-<?php elseif(isset($_GET["pay"]) && $_GET["pay"] === "failed"): ?>
-<script> alert("Transaction failed! please try again!")</script>
-<?php endif;?>
 <?php if (!empty($this->viewData["ticketDetail"])):?>
 <?php foreach($this->viewData["ticketDetail"] as $info):?>
 <div id="<?= $info["id"]?>" class="ticket-showcase ">
@@ -169,7 +164,8 @@
 	</div>
 </div>
 <?php endif; ?>
-<?php if(isset($_GET["ticket"])&& $_GET["ticket"] === "empty"):?>
-<script> alert("Please update your tickets first")</script>
+<?php if (isset($_SESSION["ticketError"])):?>
+<script> alert("<?= $_SESSION["ticketError"]?>")</script>
+<?php unset($_SESSION["ticketError"]) ?>
 <?php endif;?>
 

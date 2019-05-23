@@ -27,7 +27,7 @@ class payController extends Controller {
         $this->subtotal =$_SESSION["sumOfTicket"];
         $this->total = $_SESSION["sumOfTicket"] + $this->tax;
     }
-    public function index(){      
+    public function index(){           
             $payer = new Payer;
             $payer->setPaymentMethod("paypal");
             $items = [];
@@ -57,7 +57,7 @@ class payController extends Controller {
                 ->setInvoiceNumber(uniqid());
             $redirectUrls = new RedirectUrls();
             $redirectUrls->setReturnUrl(DOMAIN."/mywebsite.com/pay/executepayment/?success=true")
-                         ->setCancelUrl(DOMAIN."/mywebsite.com/pay/executepayment/?success=false");
+                         ->setCancelUrl(DOMAIN."/mywebsite.com/ticket");
             $payment = new Payment();
             $payment->setIntent("sale")
                 ->setPayer($payer)
@@ -91,15 +91,20 @@ class payController extends Controller {
             $saleTransaction = new SaleTransaction;
             $amusement = new Amusement;
             $ticketorder = new Ticketorder;
-            $customer->insert(["name"=>$result["payer"]["payer_info"]["first_name"].$result["payer"]["payer_info"]["last_name"],
-                              "phone"=>"0333691793",
-                               "email"=>$result["payer"]["payer_info"]["email"],
-                               "address"=>$result["payer"]["payer_info"]["shipping_address"]["line1"],
-                               "country"=>$result["payer"]["payer_info"]["shipping_address"]["country_code"]]);
-            $saleTransaction->insert(["customerId"=>$customer->getResult(),
+            if (!$customer->is_exist($result["payer"]["payer_info"]["email"])) {
+                $customer->insert(["name"=>$result["payer"]["payer_info"]["first_name"].$result["payer"]["payer_info"]["last_name"],
+                                    "phone"=>"0333691793",
+                                     "email"=>$result["payer"]["payer_info"]["email"],
+                                     "address"=>$result["payer"]["payer_info"]["shipping_address"]["line1"],
+                                     "country"=>$result["payer"]["payer_info"]["shipping_address"]["country_code"]]);
+                $insertedCustomer = $customer->getResult();
+            } else {
+                $insertedCustomer = $customer->getResult()[0]["id"];
+            }
+            $saleTransaction->insert(["customerId"=>$insertedCustomer,
                                      "amount"=>$this->total,
                                     "paid"=>1]);    
-            $insertedCustomer = $customer->getResult();
+            
             $insertedTransact = $saleTransaction->getResult();
             foreach ($_SESSION["ticketDetail"] as $ticket) {
                 $amusement->subtrackQuantity($ticket["id"], $ticket["totalQuantity"]);
@@ -118,10 +123,12 @@ class payController extends Controller {
             unset($_SESSION["ticketDetail"]);
             unset($_SESSION["sumOfTicket"]);
             unset($_SESSION["ticket"]);
-            header("Location: /mywebsite.com/ticket?pay=success");
+            $_SESSION["ticketError"] = "Transaction complete! Thank you for using our service <3";
+            header("Location: /mywebsite.com/ticket");
         } 
         else {
-           header("Location: /mywebsite.com/ticket?pay=failed");
+           $_SESSION["ticketError"] = "Transaction failed! please try again";
+           header("Location: /mywebsite.com/ticket");
         }
       }
      
